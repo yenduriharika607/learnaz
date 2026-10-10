@@ -1,0 +1,15 @@
+{
+	"name": "ADFharnw",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "australiaeast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bc2932ad-c2e0-4df5-a4c2-58a426033b87",
+		"tenantId": "d02378ec-1688-46d5-8540-1c28b5f470f6"
+	}
+}
