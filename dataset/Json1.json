@@ -11,6 +11,9 @@
 			},
 			"desfol": {
 				"type": "string"
+			},
+			"filename": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -18,8 +21,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "test/input",
-				"fileSystem": "retailsales"
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().sourcefol",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {

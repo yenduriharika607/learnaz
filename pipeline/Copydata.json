@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Filter1').output",
+						"value": "@activity('Filter1').output.value",
 						"type": "Expression"
 					},
 					"activities": [
@@ -64,14 +64,34 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "Json3",
-									"type": "DatasetReference"
+									"referenceName": "Json1",
+									"type": "DatasetReference",
+									"parameters": {
+										"sourcefol": {
+											"value": "@pipeline().parameters.SourceFolder",
+											"type": "Expression"
+										},
+										"desfol": {
+											"value": "@pipeline().parameters.DestinationFolder",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
 								{
 									"referenceName": "Json2",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"desfol": {
+											"value": "@pipeline().parameters.DestinationFolder",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
@@ -150,6 +170,9 @@
 			"DestinationFolder": {
 				"type": "string",
 				"defaultValue": "retailsales/test/output"
+			},
+			"filename": {
+				"type": "string"
 			}
 		},
 		"annotations": []
