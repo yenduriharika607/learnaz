@@ -1,0 +1,68 @@
+{
+	"name": "Json3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "@item().name",
+				"folderPath": "test/input",
+				"fileSystem": "retailsales"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"sales_id": {
+					"type": "string"
+				},
+				"transaction_date": {
+					"type": "string"
+				},
+				"store_id": {
+					"type": "string"
+				},
+				"customer_id": {
+					"type": "string"
+				},
+				"items": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"product_id": {
+								"type": "string"
+							},
+							"quantity": {
+								"type": "integer"
+							},
+							"unit_price": {
+								"type": "number"
+							},
+							"discount_amount": {
+								"type": "number"
+							},
+							"tax_amount": {
+								"type": "number"
+							},
+							"total_amount": {
+								"type": "number"
+							}
+						}
+					}
+				},
+				"payment_method": {
+					"type": "string"
+				},
+				"created_timestamp": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
