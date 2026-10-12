@@ -5,14 +5,28 @@
 			"referenceName": "LS_ADLS",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"source": {
+				"type": "string"
+			},
+			"filename": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "@item().name",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
 				"folderPath": "test/input",
-				"fileSystem": "retailsales"
+				"fileSystem": {
+					"value": "@dataset().source",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {

@@ -64,15 +64,15 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "Json1",
+									"referenceName": "Json3",
 									"type": "DatasetReference",
 									"parameters": {
-										"sourcefol": {
+										"source": {
 											"value": "@pipeline().parameters.SourceFolder",
 											"type": "Expression"
 										},
-										"desfol": {
-											"value": "@pipeline().parameters.DestinationFolder",
+										"filename": {
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
