@@ -15,8 +15,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "test/output",
-				"fileSystem": "retailsales"
+				"fileSystem": {
+					"value": "@dataset().desfol",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {}
