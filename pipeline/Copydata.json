@@ -74,10 +74,6 @@
 										"desfol": {
 											"value": "@pipeline().parameters.DestinationFolder",
 											"type": "Expression"
-										},
-										"filename": {
-											"value": "@item().name",
-											"type": "Expression"
 										}
 									}
 								}

@@ -11,9 +11,6 @@
 			},
 			"desfol": {
 				"type": "string"
-			},
-			"filename": {
-				"type": "string"
 			}
 		},
 		"annotations": [],
