@@ -22,7 +22,6 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"folderPath": "test/input",
 				"fileSystem": {
 					"value": "@dataset().source",
 					"type": "Expression"
