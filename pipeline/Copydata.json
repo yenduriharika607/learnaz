@@ -129,7 +129,7 @@
 									},
 									"ErrorMessage": {
 										"value": {
-											"value": "@activity('Copy data1_copy1').error.message",
+											"value": "@string(activity('Copy data1_copy1').output.errors)",
 											"type": "Expression"
 										},
 										"type": "String"
@@ -150,6 +150,12 @@
 									"dependencyConditions": [
 										"Succeeded"
 									]
+								},
+								{
+									"activity": "Stored procedure1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
 								}
 							],
 							"policy": {
@@ -163,12 +169,6 @@
 							"typeProperties": {
 								"source": {
 									"type": "JsonSource",
-									"additionalColumns": [
-										{
-											"name": "@item().name",
-											"value": "$$FILENAME"
-										}
-									],
 									"storeSettings": {
 										"type": "AzureBlobFSReadSettings",
 										"recursive": true,
