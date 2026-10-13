@@ -212,12 +212,54 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"desfol": {
-											"value": "@pipeline().parameters.DestinationFolder",
+											"value": "@pipeline().parameters.Archivefolder",
 											"type": "Expression"
 										}
 									}
 								}
 							]
+						},
+						{
+							"name": "Delete1",
+							"type": "Delete",
+							"dependsOn": [
+								{
+									"activity": "Copy data1_copy1_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "Json3",
+									"type": "DatasetReference",
+									"parameters": {
+										"source": {
+											"value": "@pipeline().parameters.SourceFolder",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@pipeline().parameters.filename",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": true,
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
 						}
 					]
 				}
@@ -297,6 +339,10 @@
 			},
 			"filename": {
 				"type": "string"
+			},
+			"Archivefolder": {
+				"type": "string",
+				"defaultValue": "retailsales/test/input/archive"
 			}
 		},
 		"annotations": []
