@@ -253,6 +253,16 @@
 										}
 									}
 								},
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "LS_ADLS",
+										"type": "LinkedServiceReference"
+									},
+									"path": {
+										"value": "@pipeline().parameters.Archivefolder",
+										"type": "Expression"
+									}
+								},
 								"enableLogging": true,
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
