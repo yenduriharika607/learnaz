@@ -336,7 +336,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"desfol": {
-											"value": "@pipeline().parameters.Archivefolder",
+											"value": "@pipeline().parameters.badfolder",
 											"type": "Expression"
 										}
 									}
