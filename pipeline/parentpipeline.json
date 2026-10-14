@@ -1,0 +1,77 @@
+{
+	"name": "parentpipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.folders_list",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Copydata",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"SourceFolder": {
+										"value": "@item().sourceFolder",
+										"type": "Expression"
+									},
+									"DestinationFolder": {
+										"value": "@item().destinationFolder",
+										"type": "Expression"
+									},
+									"Archivefolder": {
+										"value": "@concat(item().sourceFolder,'/archive')",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"folders_list": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"entity": "sales",
+						"sourceFolder": "incoming/sales",
+						"destinationFolder": "landing/sales",
+						"format": "json"
+					},
+					{
+						"entity": "products",
+						"sourceFolder": "incoming/products",
+						"destinationFolder": "landing/products",
+						"format": "json"
+					},
+					{
+						"entity": "customers",
+						"sourceFolder": "incoming/customers",
+						"destinationFolder": "landing/customers",
+						"format": "json"
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}
