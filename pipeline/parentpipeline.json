@@ -12,6 +12,7 @@
 						"value": "@pipeline().parameters.folders_list",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Execute Pipeline1",
@@ -38,6 +39,10 @@
 									},
 									"Archivefolder": {
 										"value": "@concat(item().sourceFolder,'/archive')",
+										"type": "Expression"
+									},
+									"badfolder": {
+										"value": "@concat(item().sourceFolder,'/bad')",
 										"type": "Expression"
 									}
 								}
