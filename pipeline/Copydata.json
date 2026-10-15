@@ -80,11 +80,15 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Json2",
+									"referenceName": "Json3",
 									"type": "DatasetReference",
 									"parameters": {
-										"desfol": {
+										"source": {
 											"value": "@pipeline().parameters.DestinationFolder",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@pipeline().parameters.filename",
 											"type": "Expression"
 										}
 									}
@@ -310,7 +314,7 @@
 									"type": "JsonSink",
 									"storeSettings": {
 										"type": "AzureBlobFSWriteSettings",
-										"copyBehavior": "PreserveHierarchy"
+										"copyBehavior": "FlattenHierarchy"
 									},
 									"formatSettings": {
 										"type": "JsonWriteSettings"
