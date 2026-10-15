@@ -208,11 +208,15 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Json2",
+									"referenceName": "Json3",
 									"type": "DatasetReference",
 									"parameters": {
-										"desfol": {
+										"source": {
 											"value": "@pipeline().parameters.Archivefolder",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
@@ -332,11 +336,15 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Json2",
+									"referenceName": "Json3",
 									"type": "DatasetReference",
 									"parameters": {
-										"desfol": {
+										"source": {
 											"value": "@pipeline().parameters.badfolder",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
