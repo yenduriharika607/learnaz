@@ -38,7 +38,7 @@
 										"type": "Expression"
 									},
 									"Archivefolder": {
-										"value": "@concat(item().sourceFolder,'/archive')",
+										"value": "@item().archiveFolder",
 										"type": "Expression"
 									},
 									"badfolder": {
@@ -60,18 +60,21 @@
 						"entity": "sales",
 						"sourceFolder": "incoming/sales",
 						"destinationFolder": "landing/sales",
+						"archiveFolder": "incoming/sales/archive",
 						"format": "json"
 					},
 					{
 						"entity": "products",
 						"sourceFolder": "incoming/products",
 						"destinationFolder": "landing/products",
+						"archiveFolder": "incoming/products/archive",
 						"format": "json"
 					},
 					{
 						"entity": "customers",
 						"sourceFolder": "incoming/customers",
 						"destinationFolder": "landing/customers",
+						"archiveFolder": "incoming/customers/archive",
 						"format": "json"
 					}
 				]
