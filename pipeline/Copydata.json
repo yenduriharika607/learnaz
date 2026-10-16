@@ -411,7 +411,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@equals(activity('Lookup1').output.firstRow.IsProcessed, 1)",
+									"value": "@equals(activity('Lookup1').output.firstRow.IsProcessed, 0)",
 									"type": "Expression"
 								}
 							}
