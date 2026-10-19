@@ -11,6 +11,9 @@
 			},
 			"sub_source_in": {
 				"type": "string"
+			},
+			"file_name": {
+				"type": "string"
 			}
 		},
 		"annotations": [],

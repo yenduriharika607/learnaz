@@ -75,6 +75,19 @@
 							"typeProperties": {
 								"source": {
 									"type": "DelimitedTextSource",
+									"additionalColumns": [
+										{
+											"name": "source_file",
+											"value": "$$FILEPATH"
+										},
+										{
+											"name": "batch_id",
+											"value": {
+												"value": "@pipeline().parameters.vBatchId",
+												"type": "Expression"
+											}
+										}
+									],
 									"storeSettings": {
 										"type": "AzureBlobFSReadSettings",
 										"recursive": true,
@@ -120,6 +133,10 @@
 										"sub_source_in": {
 											"value": "@pipeline().parameters.sub_folder",
 											"type": "Expression"
+										},
+										"file_name": {
+											"value": "@item().name",
+											"type": "Expression"
 										}
 									}
 								}
@@ -153,6 +170,9 @@
 			},
 			"primary_id": {
 				"type": "array"
+			},
+			"vBatchId": {
+				"type": "string"
 			}
 		},
 		"annotations": []
