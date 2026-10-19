@@ -12,6 +12,7 @@
 						"value": "@pipeline().parameters.folder_list",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Execute Pipeline1",
@@ -60,13 +61,13 @@
 				"type": "array",
 				"defaultValue": [
 					{
-						"source_folder": "landing",
+						"source_folder": "",
 						"sub_source_folder": "customers",
 						"table_name": "Customers",
 						"primary_id": "customer_id"
 					},
 					{
-						"source_folder": "landing",
+						"source_folder": "",
 						"sub_source_folder": "sales",
 						"table_name": "Sales",
 						"primary_id": "sales_id"
