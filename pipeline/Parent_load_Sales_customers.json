@@ -64,13 +64,17 @@
 						"source_folder": "",
 						"sub_source_folder": "customers",
 						"table_name": "Customers",
-						"primary_id": "customer_id"
+						"primary_id": [
+							"customer_id"
+						]
 					},
 					{
 						"source_folder": "",
 						"sub_source_folder": "sales",
 						"table_name": "Sales",
-						"primary_id": "sales_id"
+						"primary_id": [
+							"sales_id"
+						]
 					}
 				]
 			}
