@@ -1,0 +1,79 @@
+{
+	"name": "Parent_load_Sales_customers",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.folder_list",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "load_sales_customers",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"source_folder": {
+										"value": "@item().source_folder",
+										"type": "Expression"
+									},
+									"sub_folder": {
+										"value": "@item().sub_source_folder",
+										"type": "Expression"
+									},
+									"table": {
+										"value": "@item().table_name",
+										"type": "Expression"
+									},
+									"primary_id": {
+										"value": "@item().primary_id",
+										"type": "Expression"
+									},
+									"vBatchId": {
+										"value": "@guid()",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"folder_list": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"source_folder": "landing",
+						"sub_source_folder": "customers",
+						"table_name": "Customers",
+						"primary_id": "customer_id"
+					},
+					{
+						"source_folder": "landing",
+						"sub_source_folder": "sales",
+						"table_name": "Sales",
+						"primary_id": "sales_id"
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}
