@@ -131,20 +131,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DelimitedText1",
-						"type": "DatasetReference",
-						"parameters": {
-							"source_in": {
-								"value": "@pipeline().parameters.source_folder",
-								"type": "Expression"
-							},
-							"sub_source_in": {
-								"value": "@pipeline().parameters.sub_folder",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"enablePartitionDiscovery": false
