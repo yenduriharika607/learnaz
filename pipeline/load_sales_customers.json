@@ -131,11 +131,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"folder_in": {
-								"value": "@pipeline().parameters.source_folder",
+								"value": "retailsales",
 								"type": "Expression"
 							},
 							"sub_folder_in": {
-								"value": "@pipeline().parameters.source_folder",
+								"value": "@pipeline().parameters.sub_folder",
 								"type": "Expression"
 							}
 						}
