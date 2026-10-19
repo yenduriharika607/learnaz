@@ -6,9 +6,6 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"source_in": {
-				"type": "string"
-			},
 			"sub_source_in": {
 				"type": "string"
 			},
@@ -27,10 +24,6 @@
 				},
 				"folderPath": {
 					"value": "@dataset().sub_source_in",
-					"type": "Expression"
-				},
-				"fileSystem": {
-					"value": "@dataset().source_in",
 					"type": "Expression"
 				}
 			},
