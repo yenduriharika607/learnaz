@@ -5,6 +5,11 @@
 			"referenceName": "AzureSqlDatabase",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"tbl_nm_input": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
@@ -32,8 +37,11 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dbo",
-			"table": "PipelineAudit"
+			"schema": "stg",
+			"table": {
+				"value": "@dataset().tbl_nm_input",
+				"type": "Expression"
+			}
 		}
 	}
 }
