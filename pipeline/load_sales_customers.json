@@ -60,18 +60,29 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"maxConcurrentConnections": 3,
-									"writeBehavior": "upsert",
-									"upsertSettings": {
-										"useTempDB": true,
-										"keys": {
-											"value": "@pipeline().parameters.primary_id",
-											"type": "Expression"
-										}
-									},
+									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": false,
 									"disableMetricsCollection": false
 								},
 								"enableStaging": false,
+								"enableSkipIncompatibleRow": true,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Warning",
+										"enableReliableLogging": true
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "LS_ADLS",
+											"type": "LinkedServiceReference"
+										},
+										"path": {
+											"value": "@concat(pipeline().parameters.sub_folder,'/','logs')",
+											"type": "Expression"
+										}
+									}
+								},
 								"translator": {
 									"type": "TabularTranslator",
 									"typeConversion": true,
@@ -109,6 +120,33 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Stored procedure1",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "usp_LogPipelineAudit"
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSqlDatabase",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
@@ -145,6 +183,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
