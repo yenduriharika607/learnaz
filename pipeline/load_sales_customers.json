@@ -296,7 +296,7 @@
 														},
 														"rows_read": {
 															"value": {
-																"value": "@activity('Copy data1_copy1').outputoutput.rowsRead",
+																"value": "@activity('Copy data1_copy1').output.rowsRead",
 																"type": "Expression"
 															},
 															"type": "Int32"
@@ -429,6 +429,18 @@
 																},
 																"sink": {
 																	"name": "customer_id",
+																	"type": "String",
+																	"physicalType": "nvarchar"
+																}
+															},
+															{
+																"source": {
+																	"name": "first_name",
+																	"type": "String",
+																	"physicalType": "String"
+																},
+																"sink": {
+																	"name": "first_name",
 																	"type": "String",
 																	"physicalType": "nvarchar"
 																}
@@ -605,7 +617,7 @@
 														},
 														"rows_read": {
 															"value": {
-																"value": "@activity('Copy data1').outputoutput.rowsRead",
+																"value": "@activity('Copy data1').output.rowsRead",
 																"type": "Expression"
 															},
 															"type": "Int32"
