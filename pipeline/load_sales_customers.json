@@ -27,7 +27,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"on": {
-									"value": "@toLower(item().table)",
+									"value": "@if(\n    contains(toLower(item().name), 'customers_'),\n    'customers',\n    if(\n        contains(toLower(item().name), 'sales_'),\n        'sales',\n        'other'\n    )\n)",
 									"type": "Expression"
 								},
 								"cases": [
