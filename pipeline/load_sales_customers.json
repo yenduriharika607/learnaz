@@ -27,7 +27,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"on": {
-									"value": "@toLower(item().table_name)",
+									"value": "@toLower(item().table)",
 									"type": "Expression"
 								},
 								"cases": [
