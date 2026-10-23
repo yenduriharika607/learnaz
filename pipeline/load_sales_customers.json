@@ -559,659 +559,116 @@
 												]
 											},
 											{
-												"name": "Switch1_copy1",
-												"type": "Switch",
-												"dependsOn": [],
+												"name": "Stored procedure1_copy2",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Copy data1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
 												"userProperties": [],
 												"typeProperties": {
-													"on": {
-														"value": "@if(\n    contains(toLower(item().name), 'customers_'),\n    'customers',\n    if(\n        contains(toLower(item().name), 'sales_'),\n        'sales',\n        'other'\n    )\n)",
-														"type": "Expression"
-													},
-													"cases": [
-														{
-															"value": "Sales",
-															"activities": [
-																{
-																	"name": "Copy data1_copy1_copy1",
-																	"type": "Copy",
-																	"dependsOn": [],
-																	"policy": {
-																		"timeout": "0.12:00:00",
-																		"retry": 0,
-																		"retryIntervalInSeconds": 30,
-																		"secureOutput": false,
-																		"secureInput": false
-																	},
-																	"userProperties": [],
-																	"typeProperties": {
-																		"source": {
-																			"type": "DelimitedTextSource",
-																			"additionalColumns": [
-																				{
-																					"name": "source_file",
-																					"value": "$$FILEPATH"
-																				},
-																				{
-																					"name": "batch_id",
-																					"value": {
-																						"value": "@pipeline().parameters.vBatchId",
-																						"type": "Expression"
-																					}
-																				}
-																			],
-																			"storeSettings": {
-																				"type": "AzureBlobFSReadSettings",
-																				"recursive": true,
-																				"enablePartitionDiscovery": false
-																			},
-																			"formatSettings": {
-																				"type": "DelimitedTextReadSettings"
-																			}
-																		},
-																		"sink": {
-																			"type": "AzureSqlSink",
-																			"maxConcurrentConnections": 3,
-																			"writeBehavior": "insert",
-																			"sqlWriterUseTableLock": false,
-																			"disableMetricsCollection": false
-																		},
-																		"enableStaging": false,
-																		"enableSkipIncompatibleRow": true,
-																		"logSettings": {
-																			"enableCopyActivityLog": true,
-																			"copyActivityLogSettings": {
-																				"logLevel": "Warning",
-																				"enableReliableLogging": true
-																			},
-																			"logLocationSettings": {
-																				"linkedServiceName": {
-																					"referenceName": "LS_ADLS",
-																					"type": "LinkedServiceReference"
-																				},
-																				"path": {
-																					"value": "@concat(pipeline().parameters.sub_folder,'/','logs')",
-																					"type": "Expression"
-																				}
-																			}
-																		},
-																		"translator": {
-																			"type": "TabularTranslator",
-																			"mappings": [
-																				{
-																					"source": {
-																						"name": "sales_id",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "sales_id",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "customer_id",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "customer_id",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "product_id",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "product_id",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "quantity",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "quantity",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "unit_price",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "unit_price",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "discount_amount",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "discount_amount",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "transaction_time",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "transaction_time",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "source_file",
-																						"type": "String"
-																					},
-																					"sink": {
-																						"name": "source_file",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "batch_id",
-																						"type": "String"
-																					},
-																					"sink": {
-																						"name": "batch_id",
-																						"type": "Guid",
-																						"physicalType": "uniqueidentifier"
-																					}
-																				}
-																			],
-																			"typeConversion": true,
-																			"typeConversionSettings": {
-																				"allowDataTruncation": true,
-																				"treatBooleanAsNumber": false
-																			}
-																		}
-																	},
-																	"inputs": [
-																		{
-																			"referenceName": "DelimitedText1",
-																			"type": "DatasetReference",
-																			"parameters": {
-																				"sub_source_in": {
-																					"value": "@pipeline().parameters.sub_folder",
-																					"type": "Expression"
-																				},
-																				"file_name": {
-																					"value": "@item().name",
-																					"type": "Expression"
-																				}
-																			}
-																		}
-																	],
-																	"outputs": [
-																		{
-																			"referenceName": "AzureSqlTable2",
-																			"type": "DatasetReference"
-																		}
-																	]
-																},
-																{
-																	"name": "Stored procedure1_copy1",
-																	"type": "SqlServerStoredProcedure",
-																	"dependsOn": [
-																		{
-																			"activity": "Copy data1_copy1_copy1",
-																			"dependencyConditions": [
-																				"Completed"
-																			]
-																		}
-																	],
-																	"policy": {
-																		"timeout": "0.12:00:00",
-																		"retry": 0,
-																		"retryIntervalInSeconds": 30,
-																		"secureOutput": false,
-																		"secureInput": false
-																	},
-																	"userProperties": [],
-																	"typeProperties": {
-																		"storedProcedureName": "usp_LogPipelineAudit",
-																		"storedProcedureParameters": {
-																			"batch_id": {
-																				"value": {
-																					"value": "@pipeline().parameters.vBatchId",
-																					"type": "Expression"
-																				},
-																				"type": "Guid"
-																			},
-																			"end_time": {
-																				"value": {
-																					"value": "@utcNow()",
-																					"type": "Expression"
-																				},
-																				"type": "DateTime"
-																			},
-																			"error_message": {
-																				"value": {
-																					"value": "@if(\n    equals(activity('Copy data1_copy1').Status, 'Succeeded'),\n    '',\n    activity('Copy data1_copy1').error.message\n)",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"pipeline_name": {
-																				"value": {
-																					"value": "@pipeline().Pipeline",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"pipeline_run_id": {
-																				"value": {
-																					"value": "@pipeline().RunId",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"rows_read": {
-																				"value": {
-																					"value": "@activity('Copy data1_copy1').outputoutput.rowsRead",
-																					"type": "Expression"
-																				},
-																				"type": "Int32"
-																			},
-																			"rows_skipped": {
-																				"value": {
-																					"value": "@activity('Copy data1_copy1').output.rowsSkipped",
-																					"type": "Expression"
-																				},
-																				"type": "Int32"
-																			},
-																			"rows_written": {
-																				"value": {
-																					"value": "@activity('Copy data1_copy1').output.rowsCopied",
-																					"type": "Expression"
-																				},
-																				"type": "Int32"
-																			},
-																			"run_status": {
-																				"value": {
-																					"value": "@if(\n    equals(activity('Copy data1_copy1').status, 'Succeeded'),\n    'Succeeded',\n    'Failed'\n)",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"source_file": {
-																				"value": {
-																					"value": "@item().name",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"start_time": {
-																				"value": {
-																					"value": "@pipeline().TriggerTime",
-																					"type": "Expression"
-																				},
-																				"type": "DateTime"
-																			},
-																			"target_table": {
-																				"value": {
-																					"value": "@pipeline().parameters.table",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			}
-																		}
-																	},
-																	"linkedServiceName": {
-																		"referenceName": "AzureSqlDatabase",
-																		"type": "LinkedServiceReference"
-																	}
-																}
-															]
+													"storedProcedureName": "usp_LogPipelineAudit",
+													"storedProcedureParameters": {
+														"batch_id": {
+															"value": {
+																"value": "@pipeline().parameters.vBatchId",
+																"type": "Expression"
+															},
+															"type": "Guid"
 														},
-														{
-															"value": "customers",
-															"activities": [
-																{
-																	"name": "Copy data1_copy2",
-																	"type": "Copy",
-																	"dependsOn": [],
-																	"policy": {
-																		"timeout": "0.12:00:00",
-																		"retry": 0,
-																		"retryIntervalInSeconds": 30,
-																		"secureOutput": false,
-																		"secureInput": false
-																	},
-																	"userProperties": [],
-																	"typeProperties": {
-																		"source": {
-																			"type": "DelimitedTextSource",
-																			"additionalColumns": [
-																				{
-																					"name": "source_file",
-																					"value": "$$FILEPATH"
-																				},
-																				{
-																					"name": "batch_id",
-																					"value": {
-																						"value": "@pipeline().parameters.vBatchId",
-																						"type": "Expression"
-																					}
-																				}
-																			],
-																			"storeSettings": {
-																				"type": "AzureBlobFSReadSettings",
-																				"recursive": true,
-																				"enablePartitionDiscovery": false
-																			},
-																			"formatSettings": {
-																				"type": "DelimitedTextReadSettings"
-																			}
-																		},
-																		"sink": {
-																			"type": "AzureSqlSink",
-																			"maxConcurrentConnections": 3,
-																			"writeBehavior": "insert",
-																			"sqlWriterUseTableLock": false,
-																			"disableMetricsCollection": false
-																		},
-																		"enableStaging": false,
-																		"enableSkipIncompatibleRow": true,
-																		"logSettings": {
-																			"enableCopyActivityLog": true,
-																			"copyActivityLogSettings": {
-																				"logLevel": "Warning",
-																				"enableReliableLogging": true
-																			},
-																			"logLocationSettings": {
-																				"linkedServiceName": {
-																					"referenceName": "LS_ADLS",
-																					"type": "LinkedServiceReference"
-																				},
-																				"path": {
-																					"value": "@concat(pipeline().parameters.sub_folder,'/','logs')",
-																					"type": "Expression"
-																				}
-																			}
-																		},
-																		"translator": {
-																			"type": "TabularTranslator",
-																			"mappings": [
-																				{
-																					"source": {
-																						"name": "customer_id",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "customer_id",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "first_name",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "first_name",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "last_name",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "last_name",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "email",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "email",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "city",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "city",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "loyalty_tier",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "loyalty_tier",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "modified_date",
-																						"type": "String",
-																						"physicalType": "String"
-																					},
-																					"sink": {
-																						"name": "modified_date",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "source_file",
-																						"type": "String"
-																					},
-																					"sink": {
-																						"name": "source_file",
-																						"type": "String",
-																						"physicalType": "nvarchar"
-																					}
-																				},
-																				{
-																					"source": {
-																						"name": "batch_id",
-																						"type": "String"
-																					},
-																					"sink": {
-																						"name": "batch_id",
-																						"type": "Guid",
-																						"physicalType": "uniqueidentifier"
-																					}
-																				}
-																			],
-																			"typeConversion": true,
-																			"typeConversionSettings": {
-																				"allowDataTruncation": true,
-																				"treatBooleanAsNumber": false
-																			}
-																		}
-																	},
-																	"inputs": [
-																		{
-																			"referenceName": "DelimitedText1",
-																			"type": "DatasetReference",
-																			"parameters": {
-																				"sub_source_in": {
-																					"value": "@pipeline().parameters.sub_folder",
-																					"type": "Expression"
-																				},
-																				"file_name": {
-																					"value": "@item().name",
-																					"type": "Expression"
-																				}
-																			}
-																		}
-																	],
-																	"outputs": [
-																		{
-																			"referenceName": "AzureSqlTable1",
-																			"type": "DatasetReference"
-																		}
-																	]
-																},
-																{
-																	"name": "Stored procedure1_copy2",
-																	"type": "SqlServerStoredProcedure",
-																	"dependsOn": [
-																		{
-																			"activity": "Copy data1_copy2",
-																			"dependencyConditions": [
-																				"Succeeded"
-																			]
-																		}
-																	],
-																	"policy": {
-																		"timeout": "0.12:00:00",
-																		"retry": 0,
-																		"retryIntervalInSeconds": 30,
-																		"secureOutput": false,
-																		"secureInput": false
-																	},
-																	"userProperties": [],
-																	"typeProperties": {
-																		"storedProcedureName": "usp_LogPipelineAudit",
-																		"storedProcedureParameters": {
-																			"batch_id": {
-																				"value": {
-																					"value": "@pipeline().parameters.vBatchId",
-																					"type": "Expression"
-																				},
-																				"type": "Guid"
-																			},
-																			"end_time": {
-																				"value": {
-																					"value": "@utcNow()",
-																					"type": "Expression"
-																				},
-																				"type": "DateTime"
-																			},
-																			"error_message": {
-																				"value": {
-																					"value": "@if(\n    equals(activity('Copy data1_copy2').Status, 'Succeeded'),\n    '',\n    activity('Copy data1_copy2').error.message\n)",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"pipeline_name": {
-																				"value": {
-																					"value": "@pipeline().Pipeline",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"pipeline_run_id": {
-																				"value": {
-																					"value": "@pipeline().RunId",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"rows_read": {
-																				"value": {
-																					"value": "@activity('Copy data1_copy2').outputoutput.rowsRead",
-																					"type": "Expression"
-																				},
-																				"type": "Int32"
-																			},
-																			"rows_skipped": {
-																				"value": {
-																					"value": "@activity('Copy data1_copy2').output.rowsSkipped",
-																					"type": "Expression"
-																				},
-																				"type": "Int32"
-																			},
-																			"rows_written": {
-																				"value": {
-																					"value": "@activity('Copy data1_copy2').output.rowsCopied",
-																					"type": "Expression"
-																				},
-																				"type": "Int32"
-																			},
-																			"run_status": {
-																				"value": {
-																					"value": "@if(\n    equals(activity('Copy data1_copy2').status, 'Succeeded'),\n    'Succeeded',\n    'Failed'\n)",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"source_file": {
-																				"value": {
-																					"value": "@item().name",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			},
-																			"start_time": {
-																				"value": {
-																					"value": "@pipeline().TriggerTime",
-																					"type": "Expression"
-																				},
-																				"type": "DateTime"
-																			},
-																			"target_table": {
-																				"value": {
-																					"value": "@pipeline().parameters.table",
-																					"type": "Expression"
-																				},
-																				"type": "String"
-																			}
-																		}
-																	},
-																	"linkedServiceName": {
-																		"referenceName": "AzureSqlDatabase",
-																		"type": "LinkedServiceReference"
-																	}
-																}
-															]
+														"end_time": {
+															"value": {
+																"value": "@utcNow()",
+																"type": "Expression"
+															},
+															"type": "DateTime"
+														},
+														"error_message": {
+															"value": {
+																"value": "@if(\n    equals(activity('Copy data1').Status, 'Succeeded'),\n    '',\n    activity('Copy data1').error.message\n)",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"pipeline_name": {
+															"value": {
+																"value": "@pipeline().Pipeline",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"pipeline_run_id": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"rows_read": {
+															"value": {
+																"value": "@activity('Copy data1').outputoutput.rowsRead",
+																"type": "Expression"
+															},
+															"type": "Int32"
+														},
+														"rows_skipped": {
+															"value": {
+																"value": "@activity('Copy data1').output.rowsSkipped",
+																"type": "Expression"
+															},
+															"type": "Int32"
+														},
+														"rows_written": {
+															"value": {
+																"value": "@activity('Copy data1').output.rowsCopied",
+																"type": "Expression"
+															},
+															"type": "Int32"
+														},
+														"run_status": {
+															"value": {
+																"value": "@if(\n    equals(activity('Copy data1').status, 'Succeeded'),\n    'Succeeded',\n    'Failed'\n)",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"source_file": {
+															"value": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"start_time": {
+															"value": {
+																"value": "@pipeline().TriggerTime",
+																"type": "Expression"
+															},
+															"type": "DateTime"
+														},
+														"target_table": {
+															"value": {
+																"value": "@pipeline().parameters.table",
+																"type": "Expression"
+															},
+															"type": "String"
 														}
-													]
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "AzureSqlDatabase",
+													"type": "LinkedServiceReference"
 												}
 											}
 										]
