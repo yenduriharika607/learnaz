@@ -494,7 +494,7 @@
 									},
 									"error_message": {
 										"value": {
-											"value": "@coalesce(activity('Copy data1').error.message, '')",
+											"value": "@coalesce(activity('Switch1').error.message, '')",
 											"type": "Expression"
 										},
 										"type": "String"
@@ -515,28 +515,28 @@
 									},
 									"rows_read": {
 										"value": {
-											"value": "@activity('Copy data1').output.rowsRead",
+											"value": "@activity('Switch1').output.rowsRead",
 											"type": "Expression"
 										},
 										"type": "Int32"
 									},
 									"rows_skipped": {
 										"value": {
-											"value": "@activity('Copy data1').output.rowsSkipped",
+											"value": "@activity('Switch1').output.rowsSkipped",
 											"type": "Expression"
 										},
 										"type": "Int32"
 									},
 									"rows_written": {
 										"value": {
-											"value": "@activity('Copy data1').output.rowsCopied",
+											"value": "@activity('Switch1').output.rowsCopied",
 											"type": "Expression"
 										},
 										"type": "Int32"
 									},
 									"run_status": {
 										"value": {
-											"value": "@if(\n    equals(activity('Copy data1').Status, 'Succeeded'),\n    'Succeeded',\n    'Failed'\n)",
+											"value": "@if(\n    equals(activity('Switch1').Status, 'Succeeded'),\n    'Succeeded',\n    'Failed'\n)",
 											"type": "Expression"
 										},
 										"type": "String"
