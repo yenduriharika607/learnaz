@@ -435,18 +435,6 @@
 															},
 															{
 																"source": {
-																	"name": "first_name",
-																	"type": "String",
-																	"physicalType": "String"
-																},
-																"sink": {
-																	"name": "first_name",
-																	"type": "String",
-																	"physicalType": "nvarchar"
-																}
-															},
-															{
-																"source": {
 																	"name": "last_name",
 																	"type": "String",
 																	"physicalType": "String"
