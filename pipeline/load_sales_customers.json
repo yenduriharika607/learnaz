@@ -441,13 +441,7 @@
 												"outputs": [
 													{
 														"referenceName": "AzureSqlTable1",
-														"type": "DatasetReference",
-														"parameters": {
-															"tbl_nm_input": {
-																"value": "@pipeline().parameters.table",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												]
 											}
