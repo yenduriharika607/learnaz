@@ -14,34 +14,50 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "AuditID",
-				"type": "int",
-				"precision": 10
+				"name": "customer_id",
+				"type": "nvarchar"
 			},
 			{
-				"name": "FileName",
-				"type": "varchar"
+				"name": "first_name",
+				"type": "nvarchar"
 			},
 			{
-				"name": "Status",
-				"type": "varchar"
+				"name": "last_name",
+				"type": "nvarchar"
 			},
 			{
-				"name": "RunTimestamp",
+				"name": "email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "city",
+				"type": "nvarchar"
+			},
+			{
+				"name": "loyalty_tier",
+				"type": "nvarchar"
+			},
+			{
+				"name": "modified_date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "source_file",
+				"type": "nvarchar"
+			},
+			{
+				"name": "batch_id",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "load_timestamp",
 				"type": "datetime2",
-				"scale": 7
-			},
-			{
-				"name": "ErrorMessage",
-				"type": "varchar"
+				"scale": 0
 			}
 		],
 		"typeProperties": {
 			"schema": "stg",
-			"table": {
-				"value": "@dataset().tbl_nm_input",
-				"type": "Expression"
-			}
+			"table": "Sales"
 		}
 	}
 }
