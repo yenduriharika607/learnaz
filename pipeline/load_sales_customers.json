@@ -59,7 +59,7 @@
 														"additionalColumns": [
 															{
 																"name": "source_file",
-																"value": "$$FILEPATH"
+																"value": "$$FILENAME"
 															},
 															{
 																"name": "batch_id",
