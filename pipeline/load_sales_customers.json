@@ -39,7 +39,7 @@
 								},
 								"cases": [
 									{
-										"value": "sales",
+										"value": "Sales",
 										"activities": [
 											{
 												"name": "Copy data1_copy1",
@@ -71,7 +71,7 @@
 														],
 														"storeSettings": {
 															"type": "AzureBlobFSReadSettings",
-															"recursive": true,
+															"recursive": false,
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -392,7 +392,7 @@
 														],
 														"storeSettings": {
 															"type": "AzureBlobFSReadSettings",
-															"recursive": true,
+															"recursive": false,
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
