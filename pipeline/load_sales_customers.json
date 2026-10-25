@@ -23,7 +23,14 @@
 						{
 							"name": "Switch1",
 							"type": "Switch",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "If Condition2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"userProperties": [],
 							"typeProperties": {
 								"on": {
@@ -706,7 +713,7 @@
 							}
 						},
 						{
-							"name": "If Condition1",
+							"name": "If Condition2",
 							"type": "IfCondition",
 							"dependsOn": [
 								{
@@ -716,7 +723,13 @@
 									]
 								}
 							],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(activity('Stored procedure2').output.firstRow.IsProcessed,1)",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
