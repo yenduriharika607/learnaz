@@ -684,8 +684,27 @@
 							}
 						},
 						{
-							"name": "Stored procedure2",
-							"type": "SqlServerStoredProcedure",
+							"name": "If Condition2",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Lookup1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(activity('Lookup1').output.firstRow.IsProcessed,1)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Lookup1",
+							"type": "Lookup",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -696,38 +715,24 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"storedProcedureName": "[dbo].[is_file_processed]",
-								"storedProcedureParameters": {
-									"filename": {
-										"value": {
-											"value": "@item().name",
-											"type": "Expression"
-										},
-										"type": "String"
-									}
-								}
-							},
-							"linkedServiceName": {
-								"referenceName": "AzureSqlDatabase",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "If Condition2",
-							"type": "IfCondition",
-							"dependsOn": [
-								{
-									"activity": "Stored procedure2",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"userProperties": [],
-							"typeProperties": {
-								"expression": {
-									"value": "@equals(activity('Stored procedure2').output.firstRow.IsProcessed,1)",
-									"type": "Expression"
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderStoredProcedureName": "[dbo].[is_file_processed]",
+									"storedProcedureParameters": {
+										"filename": {
+											"type": "String",
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										}
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "SP",
+									"type": "DatasetReference"
 								}
 							}
 						}
