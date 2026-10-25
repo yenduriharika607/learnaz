@@ -756,10 +756,6 @@
 						"referenceName": "DelimitedText2",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder_in": {
-								"value": "retailsales",
-								"type": "Expression"
-							},
 							"sub_folder_in": {
 								"value": "@pipeline().parameters.sub_folder",
 								"type": "Expression"
