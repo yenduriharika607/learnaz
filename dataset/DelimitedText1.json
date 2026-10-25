@@ -25,8 +25,7 @@
 				"folderPath": {
 					"value": "@dataset().sub_source_in",
 					"type": "Expression"
-				},
-				"fileSystem": "retailsales"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
