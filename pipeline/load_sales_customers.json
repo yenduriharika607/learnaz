@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Filter1').output",
+						"value": "@activity('Filter1').output.value",
 						"type": "Expression"
 					},
 					"activities": [
@@ -98,10 +98,7 @@
 																"referenceName": "LS_ADLS",
 																"type": "LinkedServiceReference"
 															},
-															"path": {
-																"value": "@concat(pipeline().parameters.sub_folder,'/','logs')",
-																"type": "Expression"
-															}
+															"path": "activitylogs/sales"
 														}
 													},
 													"translator": {
@@ -380,7 +377,7 @@
 														"additionalColumns": [
 															{
 																"name": "source_file",
-																"value": "$$FILEPATH"
+																"value": "$$FILENAME"
 															},
 															{
 																"name": "batch_id",
@@ -419,10 +416,7 @@
 																"referenceName": "LS_ADLS",
 																"type": "LinkedServiceReference"
 															},
-															"path": {
-																"value": "@concat(pipeline().parameters.sub_folder,'/','logs')",
-																"type": "Expression"
-															}
+															"path": "activitylogs/customers"
 														}
 													},
 													"translator": {
