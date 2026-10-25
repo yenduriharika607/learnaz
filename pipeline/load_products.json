@@ -39,7 +39,7 @@
 								},
 								"ifFalseActivities": [
 									{
-										"name": "Copy data1_copy1_copy1",
+										"name": "Copy data1_copy1",
 										"type": "Copy",
 										"dependsOn": [],
 										"policy": {
@@ -203,7 +203,7 @@
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
 											{
-												"activity": "Copy data1_copy1_copy1",
+												"activity": "Copy data1_copy1",
 												"dependencyConditions": [
 													"Succeeded"
 												]
