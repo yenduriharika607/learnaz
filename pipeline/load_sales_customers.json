@@ -39,7 +39,7 @@
 								},
 								"cases": [
 									{
-										"value": "Sales",
+										"value": "sales",
 										"activities": [
 											{
 												"name": "Copy data1_copy1",
