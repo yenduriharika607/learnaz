@@ -7,7 +7,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Get Metadata1",
+						"activity": "Filter1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata1').output.childItems",
+						"value": "@activity('Filter1').output",
 						"type": "Expression"
 					},
 					"activities": [
@@ -773,6 +773,29 @@
 					},
 					"formatSettings": {
 						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Metadata1').output.childItems",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(activity('Get Metadata1').output.itemType,'File')",
+						"type": "Expression"
 					}
 				}
 			}
