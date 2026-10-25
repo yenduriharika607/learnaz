@@ -27,7 +27,7 @@
 								{
 									"activity": "If Condition2",
 									"dependencyConditions": [
-										"Succeeded"
+										"Completed"
 									]
 								}
 							],
@@ -697,7 +697,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@equals(activity('Lookup1').output.firstRow.IsProcessed,1)",
+									"value": "@equals(coalesce(activity('Lookup1').output.firstRow.IsProcessed, 0), 1)",
 									"type": "Expression"
 								}
 							}
