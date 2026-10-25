@@ -95,10 +95,7 @@
 														"referenceName": "LS_ADLS",
 														"type": "LinkedServiceReference"
 													},
-													"path": {
-														"value": "@concat(pipeline().parameters.sub_folder,'/','logs')",
-														"type": "Expression"
-													}
+													"path": "activitylogs/products"
 												}
 											},
 											"translator": {
@@ -222,7 +219,7 @@
 											"storedProcedureParameters": {
 												"batch_id": {
 													"value": {
-														"value": "@pipeline().parameters.vBatchId",
+														"value": "@guid()",
 														"type": "Expression"
 													},
 													"type": "Guid"
@@ -299,7 +296,7 @@
 												},
 												"target_table": {
 													"value": {
-														"value": "@pipeline().parameters.table",
+														"value": "'stg.products'",
 														"type": "Expression"
 													},
 													"type": "String"
