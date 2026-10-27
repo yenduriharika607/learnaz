@@ -19,11 +19,7 @@
 						"type": "RestSource",
 						"httpRequestTimeout": "00:01:40",
 						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET",
-						"paginationRules": {
-							"QueryParameters.limit": "Headers.10",
-							"QueryParameters.skip": "Headers.0"
-						}
+						"requestMethod": "GET"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
