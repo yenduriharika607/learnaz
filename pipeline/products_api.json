@@ -30,7 +30,58 @@
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "['title']"
+								},
+								"sink": {
+									"name": "title",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['category']"
+								},
+								"sink": {
+									"name": "category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['price']"
+								},
+								"sink": {
+									"name": "price",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "['meta']['updatedAt']"
+								},
+								"sink": {
+									"name": "modified_date",
+									"type": "DateTime"
+								}
+							}
+						],
+						"collectionReference": "$['products']"
+					}
 				},
 				"inputs": [
 					{
