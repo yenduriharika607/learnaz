@@ -52,7 +52,7 @@
 		],
 		"typeProperties": {
 			"schema": "stg",
-			"table": "Customers"
+			"table": "ProductsAPI"
 		}
 	}
 }
