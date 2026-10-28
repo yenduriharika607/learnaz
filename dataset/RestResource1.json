@@ -5,6 +5,14 @@
 			"referenceName": "Rest_peoductapi",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"watermarkcol": {
+				"type": "string"
+			},
+			"watermarkval": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {

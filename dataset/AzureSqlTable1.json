@@ -5,6 +5,11 @@
 			"referenceName": "AzureSqlDatabase",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"target_tbl": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
@@ -49,10 +54,6 @@
 				"type": "datetime2",
 				"scale": 0
 			}
-		],
-		"typeProperties": {
-			"schema": "stg",
-			"table": "ProductsAPI"
-		}
+		]
 	}
 }

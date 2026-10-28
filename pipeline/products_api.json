@@ -88,11 +88,22 @@
 				"outputs": [
 					{
 						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"target_tbl": {
+								"value": "@pipeline().parameters.target_tbl",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"target_tbl": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
