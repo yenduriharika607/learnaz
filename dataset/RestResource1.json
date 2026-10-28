@@ -16,7 +16,10 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "products"
+			"relativeUrl": {
+				"value": "@concat('products','?',dataset().watermarkcol,'=',dataset().watermarkval)",
+				"type": "Expression"
+			}
 		},
 		"schema": []
 	}

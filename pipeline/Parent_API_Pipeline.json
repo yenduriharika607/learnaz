@@ -64,6 +64,14 @@
 									"target_tbl": {
 										"value": "@item().target_table",
 										"type": "Expression"
+									},
+									"watermark_col": {
+										"value": "@item().watermark_column",
+										"type": "Expression"
+									},
+									"watermark_val": {
+										"value": "@coalesce(item().last_successful_watermark,'1900-01-01')",
+										"type": "Expression"
 									}
 								}
 							}

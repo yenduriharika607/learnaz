@@ -54,6 +54,13 @@
 				"type": "datetime2",
 				"scale": 0
 			}
-		]
+		],
+		"typeProperties": {
+			"schema": "stg",
+			"table": {
+				"value": "@dataset().target_tbl",
+				"type": "Expression"
+			}
+		}
 	}
 }
