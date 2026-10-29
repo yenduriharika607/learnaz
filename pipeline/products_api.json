@@ -169,7 +169,7 @@
 							"typeProperties": {
 								"variableName": "vNextSkip_int",
 								"value": {
-									"value": "@add(int(variables('vSkip')), 30)",
+									"value": "@add(int(variables('vskip_new')), 30)",
 									"type": "Expression"
 								}
 							}
@@ -191,7 +191,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "vSkip",
+								"variableName": "vskip_new",
 								"value": {
 									"value": "@variables('vNextSkip_int')",
 									"type": "Expression"
@@ -252,11 +252,11 @@
 			}
 		},
 		"variables": {
-			"vSkip": {
+			"vNextSkip_int": {
 				"type": "Integer",
 				"defaultValue": 0
 			},
-			"vNextSkip_int": {
+			"vskip_new": {
 				"type": "Integer",
 				"defaultValue": 0
 			}
