@@ -3,114 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
-				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET"
-					},
-					"sink": {
-						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "['id']"
-								},
-								"sink": {
-									"name": "id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "['title']"
-								},
-								"sink": {
-									"name": "title",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['category']"
-								},
-								"sink": {
-									"name": "category",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['price']"
-								},
-								"sink": {
-									"name": "price",
-									"type": "Decimal"
-								}
-							},
-							{
-								"source": {
-									"path": "['meta']['updatedAt']"
-								},
-								"sink": {
-									"name": "modified_date",
-									"type": "DateTime"
-								}
-							}
-						],
-						"collectionReference": "$['products']"
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "RestResource1",
-						"type": "DatasetReference",
-						"parameters": {
-							"watermarkcol": {
-								"value": "@pipeline().parameters.watermark_col",
-								"type": "Expression"
-							},
-							"watermarkval": {
-								"value": "@pipeline().parameters.watermark_val",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference",
-						"parameters": {
-							"target_tbl": {
-								"value": "@pipeline().parameters.target_tbl",
-								"type": "Expression"
-							}
-						}
-					}
-				]
-			},
-			{
 				"name": "Web1",
 				"type": "WebActivity",
 				"dependsOn": [],
@@ -128,6 +20,189 @@
 						"value": "@concat('https://dummyjson.com/','products','?',pipeline().parameters.watermark_col,'=',pipeline().parameters.watermark_val)",
 						"type": "Expression"
 					}
+				}
+			},
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greaterOrEquals(\r\n    variables('vNextSkip_int'),\r\n    int(activity('Web1').output.total)\r\n)",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "['id']"
+											},
+											"sink": {
+												"name": "id",
+												"type": "Int32"
+											}
+										},
+										{
+											"source": {
+												"path": "['title']"
+											},
+											"sink": {
+												"name": "title",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['category']"
+											},
+											"sink": {
+												"name": "category",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['price']"
+											},
+											"sink": {
+												"name": "price",
+												"type": "Decimal"
+											}
+										},
+										{
+											"source": {
+												"path": "['meta']['updatedAt']"
+											},
+											"sink": {
+												"name": "modified_date",
+												"type": "DateTime"
+											}
+										}
+									],
+									"collectionReference": "$['products']"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "RestResource1",
+									"type": "DatasetReference",
+									"parameters": {
+										"watermarkcol": {
+											"value": "@pipeline().parameters.watermark_col",
+											"type": "Expression"
+										},
+										"watermarkval": {
+											"value": "@pipeline().parameters.watermark_val",
+											"type": "Expression"
+										},
+										"skip": {
+											"value": "@variables('vNextSkip_int')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AzureSqlTable1",
+									"type": "DatasetReference",
+									"parameters": {
+										"target_tbl": {
+											"value": "@pipeline().parameters.target_tbl",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "vNextSkip_int",
+								"value": {
+									"value": "@add(variables('vSkip'),30)",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"timeout": "0.12:00:00"
+				}
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Until1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "etl.usp_UpdateProductsWatermark"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
@@ -150,6 +225,17 @@
 			"vPageSize": {
 				"type": "int",
 				"defaultValue": 30
+			}
+		},
+		"variables": {
+			"vSkip": {
+				"type": "String"
+			},
+			"vNextSkip": {
+				"type": "String"
+			},
+			"vNextSkip_int": {
+				"type": "Integer"
 			}
 		},
 		"annotations": []

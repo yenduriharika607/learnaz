@@ -11,13 +11,16 @@
 			},
 			"watermarkval": {
 				"type": "string"
+			},
+			"skip": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('products','?',dataset().watermarkcol,'=',dataset().watermarkval)",
+				"value": "@concat('products','?',dataset().watermarkcol,'=',dataset().watermarkval,'&limit=30&skip=',dataset().skip)",
 				"type": "Expression"
 			}
 		},
