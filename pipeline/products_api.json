@@ -131,7 +131,7 @@
 											"type": "Expression"
 										},
 										"skip": {
-											"value": "@variables('vNextSkip_int')",
+											"value": "@variables('vSkip')",
 											"type": "Expression"
 										}
 									}
@@ -253,10 +253,7 @@
 		},
 		"variables": {
 			"vSkip": {
-				"type": "String"
-			},
-			"vNextSkip": {
-				"type": "String"
+				"type": "Integer"
 			},
 			"vNextSkip_int": {
 				"type": "Integer"
