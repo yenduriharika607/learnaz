@@ -13,7 +13,7 @@
 				"type": "string"
 			},
 			"skip": {
-				"type": "string"
+				"type": "int"
 			}
 		},
 		"annotations": [],
