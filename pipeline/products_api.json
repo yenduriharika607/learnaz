@@ -131,7 +131,7 @@
 											"type": "Expression"
 										},
 										"skip": {
-											"value": "@variables('vSkip')",
+											"value": "@variables('vskip_new')",
 											"type": "Expression"
 										}
 									}
