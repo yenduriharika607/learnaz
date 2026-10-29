@@ -20,7 +20,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('products','?',dataset().watermarkcol,'=',dataset().watermarkval,'&limit=30&skip=',dataset().skip)",
+				"value": "@concat('products','?',dataset().watermarkcol,'=',dataset().watermarkval,'&limit=30&skip=',string(dataset().skip))",
 				"type": "Expression"
 			}
 		},
