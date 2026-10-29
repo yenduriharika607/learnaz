@@ -169,7 +169,7 @@
 							"typeProperties": {
 								"variableName": "vNextSkip_int",
 								"value": {
-									"value": "@add(variables('vSkip'),30)",
+									"value": "@add(int(variables('vSkip')), 30)",
 									"type": "Expression"
 								}
 							}
@@ -253,10 +253,12 @@
 		},
 		"variables": {
 			"vSkip": {
-				"type": "Integer"
+				"type": "Integer",
+				"defaultValue": 0
 			},
 			"vNextSkip_int": {
-				"type": "Integer"
+				"type": "Integer",
+				"defaultValue": 0
 			}
 		},
 		"annotations": []
