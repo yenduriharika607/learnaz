@@ -5,6 +5,8 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -107,6 +109,26 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"url": {
+						"value": "@concat('https://dummyjson.com/','products','?',pipeline().parameters.watermark_col,'=',pipeline().parameters.watermark_val)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -118,6 +140,16 @@
 			},
 			"watermark_val": {
 				"type": "string"
+			},
+			"vSkip": {
+				"type": "int"
+			},
+			"vTotal": {
+				"type": "int"
+			},
+			"vPageSize": {
+				"type": "int",
+				"defaultValue": 30
 			}
 		},
 		"annotations": []
