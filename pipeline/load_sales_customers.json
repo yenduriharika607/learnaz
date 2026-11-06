@@ -566,7 +566,10 @@
 															"outputs": [
 																{
 																	"referenceName": "AzureSqlTable1",
-																	"type": "DatasetReference"
+																	"type": "DatasetReference",
+																	"parameters": {
+																		"target_tbl": "customers"
+																	}
 																}
 															]
 														},
