@@ -1,7 +1,0 @@
-{
-	"name": "mpe-sql-practice",
-	"properties": {
-		"privateLinkResourceId": "/subscriptions/16b4793b-38ba-4bbf-a4a8-a4e3a688fdd1/resourceGroups/RG1/providers/Microsoft.Sql/servers/dbserverhar",
-		"groupId": "sqlServer"
-	}
-}
