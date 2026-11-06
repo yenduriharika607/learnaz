@@ -712,14 +712,11 @@
 									"sqlReaderStoredProcedureName": "[dbo].[is_file_processed]",
 									"storedProcedureParameters": {
 										"filename": {
-											"type": "String",
-											"value": {
-												"value": "@item().name",
-												"type": "Expression"
-											}
+											"type": "String"
 										}
 									},
 									"queryTimeout": "02:00:00",
+									"isolationLevel": "ReadCommitted",
 									"partitionOption": "None"
 								},
 								"dataset": {
