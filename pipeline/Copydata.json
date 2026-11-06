@@ -391,7 +391,7 @@
 									"partitionOption": "None"
 								},
 								"dataset": {
-									"referenceName": "AzureSqlTable1",
+									"referenceName": "AzureSqlTable23",
 									"type": "DatasetReference"
 								},
 								"firstRowOnly": false
