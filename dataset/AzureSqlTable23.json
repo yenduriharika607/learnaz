@@ -1,0 +1,80 @@
+{
+	"name": "AzureSqlTable23",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "audit_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "pipeline_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "pipeline_run_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "batch_id",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "source_file",
+				"type": "nvarchar"
+			},
+			{
+				"name": "target_table",
+				"type": "nvarchar"
+			},
+			{
+				"name": "rows_read",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "rows_written",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "rows_skipped",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "run_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "error_message",
+				"type": "nvarchar"
+			},
+			{
+				"name": "start_time",
+				"type": "datetime2",
+				"scale": 3
+			},
+			{
+				"name": "end_time",
+				"type": "datetime2",
+				"scale": 3
+			},
+			{
+				"name": "created_at",
+				"type": "datetime2",
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "PipelineAudit"
+		}
+	}
+}

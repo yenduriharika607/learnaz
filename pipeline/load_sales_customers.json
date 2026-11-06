@@ -723,7 +723,7 @@
 									"partitionOption": "None"
 								},
 								"dataset": {
-									"referenceName": "SP",
+									"referenceName": "AzureSqlTable23",
 									"type": "DatasetReference"
 								}
 							}
